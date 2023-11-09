@@ -8,6 +8,5 @@ export default defineConfig({
 		Icons({
 			compiler: 'svelte'
 		})
-	],
-	optimizeDeps: { exclude: ['fsevents'] }
+	]
 });
