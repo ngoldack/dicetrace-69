@@ -7,7 +7,7 @@ const config = {
 	paths: { relative: false },
 	kit: {
 		adapter: adapter({
-			runtime: 'nodejs18.x'
+			runtime: 'edge'
 		})
 	}
 };
