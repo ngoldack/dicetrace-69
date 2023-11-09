@@ -1,13 +1,13 @@
 {
-  "version": "5",
-  "dialect": "pg",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1699491711866,
-      "tag": "0000_cuddly_garia",
-      "breakpoints": true
-    }
-  ]
+	"version": "5",
+	"dialect": "pg",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1699491711866,
+			"tag": "0000_cuddly_garia",
+			"breakpoints": true
+		}
+	]
 }

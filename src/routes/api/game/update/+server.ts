@@ -3,7 +3,7 @@ import { GameSchema } from '$lib/bgg/thing';
 import { db } from '$lib/db/conn.server';
 import { Games } from '$lib/db/schema';
 import type { RequestHandler } from '@sveltejs/kit';
-import bggXmlApiClient from 'bgg-xml-api-client';
+import { getBggThing } from 'bgg-xml-api-client';
 import { eq, isNotNull, lte } from 'drizzle-orm';
 
 const updateDelay = 1000 * 60 * 10; // 1 hour
@@ -20,7 +20,7 @@ export const GET: RequestHandler = CronRequestHandler(async () => {
 		return g.bggId ?? 0;
 	});
 
-	const rawGames = await bggXmlApiClient.getBggThing({
+	const rawGames = await getBggThing({
 		id: ids,
 		type: 'boardgame'
 	});

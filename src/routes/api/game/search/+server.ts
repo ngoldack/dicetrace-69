@@ -1,17 +1,17 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import bggXmlApiClient from 'bgg-xml-api-client';
+import { getBggThing, getBggSearch } from 'bgg-xml-api-client';
 
 export const GET: RequestHandler = async ({ url }) => {
 	const query = url.searchParams.get('q');
 	if (!query) return new Response('Missing query', { status: 400 });
 
-	const queryResults = await bggXmlApiClient.getBggSearch({
+	const queryResults = await getBggSearch({
 		query,
 		type: 'boardgame'
 	});
 
 	const ids = queryResults.item.map((item) => item.id);
-	const games = await bggXmlApiClient.getBggThing({
+	const games = await getBggThing({
 		id: ids,
 		type: 'boardgame'
 	});
