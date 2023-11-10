@@ -1,7 +1,7 @@
 import { CronRequestHandler } from '$lib/api/cron';
 import { GameSchema } from '$lib/bgg/thing';
-import { db } from '$lib/db/conn.server';
-import { Games } from '$lib/db/schema';
+import { db } from '$lib/db/client.server';
+import { Games } from '$lib/db/schemas/game.schema';
 import type { RequestHandler } from '@sveltejs/kit';
 import { getBggThing } from 'bgg-xml-api-client';
 import { eq, isNotNull, lte } from 'drizzle-orm';

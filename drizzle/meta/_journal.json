@@ -1,13 +1,27 @@
 {
-	"version": "5",
-	"dialect": "pg",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "5",
-			"when": 1699491711866,
-			"tag": "0000_cuddly_garia",
-			"breakpoints": true
-		}
-	]
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1699560279958,
+      "tag": "0000_thin_nighthawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1699606168960,
+      "tag": "0001_fearless_pretty_boy",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1699606267337,
+      "tag": "0002_melted_human_cannonball",
+      "breakpoints": true
+    }
+  ]
 }
