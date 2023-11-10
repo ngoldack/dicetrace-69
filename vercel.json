@@ -6,5 +6,8 @@
 			"path": "/api/game/update",
 			"schedule": "0 0 * * *"
 		}
-	]
+	],
+	"git": {
+		"deploymentEnabled": false
+	}
 }
