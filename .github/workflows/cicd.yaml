@@ -17,7 +17,6 @@ jobs:
 
       - run: bun run check
       - run: bun run build
-
       - run: bun run test
 
       - uses: actions/upload-artifact@v3

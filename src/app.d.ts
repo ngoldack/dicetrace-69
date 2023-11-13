@@ -10,6 +10,7 @@ declare global {
 		interface Error extends E {}
 		interface Locals {
 			user?: User;
+			messages?: string[];
 		}
 		// interface PageData {}
 		// interface Platform {}

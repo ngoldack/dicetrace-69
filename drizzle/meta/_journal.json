@@ -1,26 +1,19 @@
 {
   "version": "5",
-  "dialect": "pg",
+  "dialect": "sqlite",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1699560279958,
-      "tag": "0000_thin_nighthawk",
+      "when": 1699802873999,
+      "tag": "0000_luxuriant_the_stranger",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1699606168960,
-      "tag": "0001_fearless_pretty_boy",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1699606267337,
-      "tag": "0002_melted_human_cannonball",
+      "when": 1699807730064,
+      "tag": "0001_polite_magma",
       "breakpoints": true
     }
   ]

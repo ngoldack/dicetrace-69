@@ -1,12 +1,12 @@
 import { sequence } from '@sveltejs/kit/hooks';
-import { redirect, type Handle } from '@sveltejs/kit';
+import { redirect, type Handle, error } from '@sveltejs/kit';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import { env } from '$env/dynamic/private';
 import Passage from '@auth/core/providers/passage';
 import { db } from '$lib/db/client.server';
-import { selectUserSchema, user as userTable } from '$lib/db/schemas/user.schema';
-import { eq } from 'drizzle-orm';
-import { createInsertSchema } from 'drizzle-zod';
+import { insertUserSchema, selectUserSchema, user as userTable, type InsertUser } from '$lib/db/schemas/user.schema';
+import { eq, or } from 'drizzle-orm';
+import { createId } from '@paralleldrive/cuid2';
 
 // Authenticate checks if the user is authenticated and sets the session if so.
 const authenticate: Handle = SvelteKitAuth({
@@ -16,7 +16,33 @@ const authenticate: Handle = SvelteKitAuth({
 			clientId: env.PASSAGE_CLIENT_ID,
 			clientSecret: env.PASSAGE_CLIENT_SECRET
 		})
-	]
+	],
+	callbacks: {
+		signIn: async ({profile}) => {
+			if(profile?.email && profile?.sub) {
+				const users = await db.select().from(userTable).where(
+					or(eq(userTable.auth_id, profile.sub), eq(userTable.email, profile.email)
+				));
+				if(users.length === 0) {
+					const id = createId();
+					console.time('user creation')
+					const parsed: InsertUser = insertUserSchema.parse({
+						id: id,
+						auth_id: profile?.sub,
+						email: profile?.email,
+						updatedAt: new Date(Date.now()),
+						createdAt: new Date(Date.now()),
+						avatar: `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${id}`
+					});
+					console.timeLog('user creation', parsed)
+					await db.insert(userTable).values(parsed)
+					console.timeEnd('user creation')
+				}
+			}
+
+			return true
+		},
+	}
 });
 
 // Authorization checks if the user is authenticated and redirects to the signin page if not.
@@ -40,12 +66,10 @@ const userdata: Handle = async ({ event, resolve }) => {
 	const users = await db.select().from(userTable).where(eq(userTable.email, session.user.email));
 	switch (users.length) {
 		case 0: {
-			const parsed = createInsertSchema(userTable).parse({
-				email: session.user.email
+			throw error(500, {
+				id: createId(),
+				message: 'User not found in database.',				
 			});
-			await db.insert(userTable).values(parsed);
-
-			return await userdata({ event, resolve });
 		}
 		case 1: {
 			event.locals.user = selectUserSchema.parse(users[0]);
@@ -58,5 +82,16 @@ const userdata: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
+// messages strips all message query parameters from the url.
+const messages: Handle = async ({ event, resolve }) => {
+	if (event.url.searchParams.has('message')) {
+		const messages = event.url.searchParams.getAll('message');
+		event.locals.messages = messages;
+		event.url.searchParams.delete('message');
+	}
+
+	return await resolve(event);
+};
+
 // Handle is the entry point for all hooks.
-export const handle: Handle = sequence(authenticate, authorization, userdata);
+export const handle: Handle = sequence(authenticate, authorization, userdata, messages);

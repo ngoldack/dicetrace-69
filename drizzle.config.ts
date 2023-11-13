@@ -3,14 +3,16 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not defined');
+if (!process.env.DATABASE_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not defined');
 
 export default {
 	schema: './src/lib/db/schemas/*',
 	out: './drizzle',
 	breakpoints: true,
-	driver: 'pg',
+	driver: 'turso',
 	verbose: true,
 	dbCredentials: {
-		connectionString: process.env.DATABASE_URL
+		url: process.env.DATABASE_URL,
+		authToken: process.env.DATABASE_AUTH_TOKEN,
 	}
 } satisfies Config;

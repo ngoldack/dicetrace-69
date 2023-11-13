@@ -1,6 +1,25 @@
 import { env } from '$env/dynamic/private';
-import { drizzle, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/libsql';
 
-const queryClient = postgres(env.DATABASE_URL ?? '');
-export const db: PostgresJsDatabase = drizzle(queryClient);
+import { friendship } from './schemas/friendship.schema';
+import { item } from './schemas/item.schema';
+import { user } from './schemas/user.schema';
+import { collection } from './schemas/collection.schema';
+import { collectionItem } from './schemas/collectionItem.schema';
+import { event } from './schemas/event.schema';
+
+import { createClient } from '@libsql/client';
+
+const client = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+
+export const db = drizzle(client, {
+    schema: {
+        friendship,
+        user,
+        item,
+        collection,
+        collectionItem,
+        event,
+    },
+    logger: true
+});

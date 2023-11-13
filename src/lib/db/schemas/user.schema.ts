@@ -1,20 +1,30 @@
-import { sql } from 'drizzle-orm';
-import { varchar } from 'drizzle-orm/pg-core';
-import { pgTable, uuid } from 'drizzle-orm/pg-core';
-import { createSelectSchema } from 'drizzle-zod';
-import type z from 'zod';
+import { defaultColumns, idColumn } from '../default';
 
-export const user = pgTable('user', {
-	id: uuid('id')
-		.primaryKey()
-		.default(sql`gen_random_uuid()`),
-	email: varchar('email', {
-		length: 255
-	})
+import type z from 'zod';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+
+export const user = sqliteTable('user', {
+	id: idColumn,
+	...defaultColumns,
+
+	auth_id: text('auth_id')
 		.unique()
-		.notNull()
+		.notNull(),
+	email: text('email')
+		.unique()
+		.notNull(),
+
+	name: text('name'),
+	avatar: text('avatar').notNull(),
 });
 
 export const selectUserSchema = createSelectSchema(user);
 export type SelectUserSchema = typeof selectUserSchema;
 export type User = z.infer<typeof selectUserSchema>;
+
+export const insertUserSchema = createInsertSchema(user)
+export type InsertUserSchema = typeof insertUserSchema;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+
+export const updateUserSchema = createInsertSchema(user)

@@ -1,13 +1,21 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { Activity, ActivityItem } from 'flowbite-svelte';
 
-	import type { PageData } from './$types';
-
-	export let data: PageData;
+	export let data;
 </script>
 
-<h1>Profile</h1>
-<pre>{JSON.stringify(data, null, 2)}</pre>
-<form method="post" action="?/logout" use:enhance>
-	<input type="submit" value="Sign out" />
-</form>
+<a href="/app/profile/edit">Edit</a>
+
+<div class="grid md:grid-cols-3 sm:col-span-1">
+	<div class="col-span-2">
+		{#if data.activities.length === 0}
+			<pre>{JSON.stringify(data, null, 2)}</pre>
+			<Activity>
+				<ActivityItem activities={data.activities} />
+			</Activity>
+		{:else}
+			<p>No activities yet.</p>
+		{/if}
+	</div>
+	<div class="">t</div>
+</div>
