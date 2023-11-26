@@ -1,0 +1,72 @@
+<script lang="ts">
+	import * as Form from '$lib/components/ui/form';
+	import { superForm as superFormFn } from 'sveltekit-superforms/client';
+
+	import { buttonVariants } from '$lib/components/ui/button';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import type { SuperValidated } from 'sveltekit-superforms';
+	import PlusIcon from '~icons/lucide/plus';
+	import { eventInsertSchema, type EventInsertSchema } from '$lib/db/schemas/event.schema';
+
+	export let inputForm: SuperValidated<EventInsertSchema>;
+
+	let open = false;
+	const superForm = superFormFn(inputForm);
+</script>
+
+<Dialog.Root bind:open>
+	<Dialog.Trigger class={buttonVariants({ variant: 'default' })}>
+		<PlusIcon class="mr-2 h-4 w-4" />
+		Create event
+	</Dialog.Trigger>
+	<Dialog.Content class="sm:max-w-[425px]">
+		<Form.Root method="POST" controlled form={superForm} schema={eventInsertSchema} let:config>
+			<Dialog.Header>
+				<Dialog.Title>Create a new event</Dialog.Title>
+				<Dialog.Description>
+					You can create a new event here. Click create when you're done.
+				</Dialog.Description>
+			</Dialog.Header>
+			<div class="grid gap-4 py-4">
+				<Form.Field {config} name="name">
+					<Form.Item>
+						<Form.Label>Name</Form.Label>
+						<Form.Input />
+						<Form.Description>This is the public name of your new event.</Form.Description>
+						<Form.Validation />
+					</Form.Item>
+				</Form.Field>
+
+				<Form.Field {config} name="visibility">
+					<Form.Item>
+						<Form.Label>Visibility</Form.Label>
+						<Form.Select>
+							<Form.SelectTrigger placeholder="Select a visibility" />
+							<Form.SelectContent>
+								<Form.SelectItem value="group">Group</Form.SelectItem>
+								<Form.SelectItem value="private">Private</Form.SelectItem>
+							</Form.SelectContent>
+						</Form.Select>
+						<Form.Description>This is the visibility of the event.</Form.Description>
+						<Form.Validation />
+					</Form.Item>
+				</Form.Field>
+
+				<Form.Field {config} name="beginAt">
+					<Form.Item>
+						<Form.Label>Begin</Form.Label>
+						<Form.Input type="datetime-local" />
+						<Form.Description>This is the public name of your new event.</Form.Description>
+						<Form.Validation />
+					</Form.Item>
+				</Form.Field>
+			</div>
+			<Dialog.Footer>
+				<Form.Button>Create</Form.Button>
+				<Form.Button variant="outline" type="button" on:click={() => (open = false)}>
+					Cancel
+				</Form.Button>
+			</Dialog.Footer>
+		</Form.Root>
+	</Dialog.Content>
+</Dialog.Root>
