@@ -4,7 +4,7 @@ import { runMigrations } from '$lib/db/migration.server';
 import logger from '$lib/logger';
 import Passage from '@auth/core/providers/passage';
 import { SvelteKitAuth } from '@auth/sveltekit';
-import { redirect, type Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { match } from 'ts-pattern';
 
@@ -43,15 +43,5 @@ const authenticate: Handle = SvelteKitAuth({
 	}
 });
 
-// Authorization checks if the user is authenticated and redirects to the signin page if not.
-const authorization: Handle = async ({ event, resolve }) => {
-	if (event.url.pathname.startsWith('/app')) {
-		const session = await event.locals.getSession();
-		if (!session) throw redirect(303, '/auth');
-	}
-
-	return resolve(event);
-};
-
 // Handle is the entry point for all hooks.
-export const handle: Handle = sequence(authenticate, authorization);
+export const handle: Handle = sequence(authenticate);

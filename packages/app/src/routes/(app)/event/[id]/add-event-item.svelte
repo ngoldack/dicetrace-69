@@ -73,8 +73,8 @@
 								</Popover.Trigger>
 								<Popover.Content class="w-[200px] p-0">
 									<Command.Root>
-										<Command.Input autofocus placeholder="Search language..." class="h-9" />
-										<Command.Empty>No language found.</Command.Empty>
+										<Command.Input autofocus placeholder="Search game..." class="h-9" />
+										<Command.Empty>No game found.</Command.Empty>
 										<Command.Group>
 											{#each items as item}
 												<Command.Item
