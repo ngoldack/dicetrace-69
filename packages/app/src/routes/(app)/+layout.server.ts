@@ -6,12 +6,12 @@ import { eq } from 'drizzle-orm';
 export const load = async ({ locals, parent }) => {
 	const { session } = await parent();
 	if (!session?.user?.id) {
-		throw redirect(303, '/auth');
+		redirect(303, '/auth');
 	}
 
 	const user = await db.select().from(users).where(eq(users.auth_id, session.user.id)).get();
 	if (!user) {
-		throw redirect(303, '/hello');
+		redirect(303, '/hello');
 	}
 
 	return {

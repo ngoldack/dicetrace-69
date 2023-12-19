@@ -152,7 +152,7 @@ export const actions: Actions = {
 			logger.debug({ eventId: params.id, userId: user.id }, 'Joined event');
 		});
 
-		throw redirect(302, `/event/${params.id}`);
+		redirect(302, `/event/${params.id}`);
 	},
 
 	leave: async ({ params, locals }) => {
@@ -176,6 +176,6 @@ export const actions: Actions = {
 			logger.debug({ eventId: params.id, userId: user.id }, 'Left event');
 		});
 
-		throw redirect(302, '/');
+		redirect(302, '/');
 	}
 };

@@ -22,10 +22,10 @@ export const load: LayoutServerLoad = async ({ parent, params }) => {
 		.from(groupMembers)
 		.where(and(eq(groupMembers.userId, user.id), eq(groupMembers.groupId, params.id)));
 	if (count === 0) {
-		throw error(403, {
-			id: nanoid(),
-			message: 'You are not a member of this group'
-		});
+		error(403, {
+        			id: nanoid(),
+        			message: 'You are not a member of this group'
+        		});
 	}
 
 	const data = await db

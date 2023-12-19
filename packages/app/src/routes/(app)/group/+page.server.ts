@@ -74,6 +74,6 @@ export const actions = {
 			});
 		}
 
-		throw redirect(303, `/group/${groupId}`);
+		redirect(303, `/group/${groupId}`);
 	}
 };

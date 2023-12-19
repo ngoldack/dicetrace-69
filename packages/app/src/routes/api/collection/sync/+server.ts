@@ -14,10 +14,10 @@ export const GET: RequestHandler = AuthenticatedRequestHandler(async ({ locals }
 	const session = await locals.getSession();
 
 	if (!session?.user?.id) {
-		throw error(401, {
-			id: nanoid(),
-			message: 'Unauthorized'
-		});
+		error(401, {
+        			id: nanoid(),
+        			message: 'Unauthorized'
+        		});
 	}
 
 	const user = await db.select().from(users).where(eq(users.auth_id, session.user.id)).get();

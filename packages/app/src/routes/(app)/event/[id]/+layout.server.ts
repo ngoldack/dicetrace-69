@@ -26,10 +26,10 @@ export const load: LayoutServerLoad = async ({ locals, parent }) => {
 		.where(eq(eventParticipants.userId, user.id));
 
 	if (count === 0) {
-		throw error(403, {
-			id: nanoid(),
-			message: 'You are not a member of this event'
-		});
+		error(403, {
+        			id: nanoid(),
+        			message: 'You are not a member of this event'
+        		});
 	}
 
 	const data = await db

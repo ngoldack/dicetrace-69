@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (session?.user?.id) {
 		const user = await db.select().from(users).where(eq(users.auth_id, session.user.id)).get();
 		if (user) {
-			throw redirect(303, '/');
+			redirect(303, '/');
 		}
 	}
 
@@ -94,6 +94,6 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/');
+		redirect(303, '/');
 	}
 };
