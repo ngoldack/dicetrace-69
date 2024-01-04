@@ -9,9 +9,8 @@ import { eq } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
 import { superValidate } from 'sveltekit-superforms/server';
 import { helloSchema } from '.';
-import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }) => {
 	const session = await locals.getSession();
 	if (session?.user?.id) {
 		const user = await db.select().from(users).where(eq(users.auth_id, session.user.id)).get();
@@ -27,7 +26,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ request, locals }) => {
 		const form = await superValidate(request, helloSchema);
 

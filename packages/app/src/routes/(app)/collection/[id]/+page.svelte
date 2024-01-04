@@ -76,7 +76,7 @@
 			<DropdownMenu.CheckboxItem bind:checked={collection.enabled}>
 				<div class="flex flex-col">
 					<span class="text-foreground">{collection.name}</span>
-					<span class="text-muted-foreground text-xs">{collection.id}</span>
+					<span class="text-xs text-muted-foreground">{collection.id}</span>
 				</div>
 			</DropdownMenu.CheckboxItem>
 		{/each}

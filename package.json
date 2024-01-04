@@ -4,6 +4,6 @@
     "packages/*"
   ],
   "scripts": {
-    "update": "bunx npm-check-updates --interactive --format group -ws"
+    "update": "bunx npm-check-updates --interactive --format group -ws --peer"
   }
 }

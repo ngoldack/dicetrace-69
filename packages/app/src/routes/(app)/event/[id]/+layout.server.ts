@@ -27,9 +27,9 @@ export const load: LayoutServerLoad = async ({ locals, parent }) => {
 
 	if (count === 0) {
 		error(403, {
-        			id: nanoid(),
-        			message: 'You are not a member of this event'
-        		});
+			id: nanoid(),
+			message: 'You are not a member of this event'
+		});
 	}
 
 	const data = await db

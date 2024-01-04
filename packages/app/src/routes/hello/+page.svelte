@@ -67,7 +67,7 @@
 								In order to use this application, you must have a
 								<a
 									href="https://boardgamegeek.com"
-									class="hover:text-primary underline underline-offset-4"
+									class="underline underline-offset-4 hover:text-primary"
 								>
 									account
 								</a>
@@ -111,11 +111,11 @@
 							<Card.Title>Finish onboarding</Card.Title>
 							<Card.Description>
 								By clicking submit, you agree to our
-								<a href="/terms" class="hover:text-primary underline underline-offset-4">
+								<a href="/terms" class="underline underline-offset-4 hover:text-primary">
 									Terms of Service
 								</a>
 								and
-								<a href="/privacy" class="hover:text-primary underline underline-offset-4">
+								<a href="/privacy" class="underline underline-offset-4 hover:text-primary">
 									Privacy Policy
 								</a>
 								.

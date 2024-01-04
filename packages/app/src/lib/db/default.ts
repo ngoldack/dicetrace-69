@@ -1,5 +1,6 @@
 import { integer, text } from 'drizzle-orm/sqlite-core';
 import { nanoid } from 'nanoid';
+
 export const defaultColumns = {
 	createdAt: integer('createdAt', { mode: 'timestamp' })
 		.notNull()

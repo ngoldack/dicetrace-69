@@ -69,7 +69,7 @@
 						</div>
 						<Separator orientation="vertical" />
 						<div class="flex flex-col gap-2">
-							<span class="text-foreground text-xl">
+							<span class="text-xl text-foreground">
 								{item.name}
 							</span>
 							<div class="flex items-center gap-2">

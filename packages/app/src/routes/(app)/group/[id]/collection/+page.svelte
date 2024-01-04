@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex items-center justify-between space-y-2">
-	<h2 class="text-muted-foreground text-3xl font-bold tracking-tight">
+	<h2 class="text-3xl font-bold tracking-tight text-muted-foreground">
 		Collection of
 		<span class="text-foreground">{data.group?.name}</span>
 	</h2>
