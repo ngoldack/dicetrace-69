@@ -17,7 +17,7 @@
 		<BackIcon class="mr-2 h-4 w-4" />
 		Back to the homepage
 	</Button>
-	<div class="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
+	<div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
 		<div
 			class="absolute inset-0 bg-cover"
 			style="

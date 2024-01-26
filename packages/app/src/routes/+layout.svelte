@@ -3,7 +3,6 @@
 	import { env } from '$env/dynamic/public';
 	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
-	import { Toasts } from 'svoast';
 	import { ModeWatcher } from 'mode-watcher';
 
 	if (!env.PUBLIC_DISABLE_ANALYTICS) {
@@ -15,5 +14,4 @@
 	<slot />
 </div>
 
-<Toasts />
 <ModeWatcher />
